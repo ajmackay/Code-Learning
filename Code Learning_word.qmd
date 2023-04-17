@@ -1,0 +1,77 @@
+---
+format:
+  docx:
+    reference-doc: resources/outputs.docx
+filters:
+  - resources/landscape-filter.lua
+knitr: 
+  opts_chunk: 
+    results: asis
+    echo: false
+editor: visual
+---
+
+```{r}
+#| include: false
+#| label: setup
+
+library(dcutilities)
+library(flextable)
+
+
+.Last = function(){archive.quarto.output("Code-Learning.docx", open = F, prefix = NULL)}
+
+
+
+options("dcutilities.prep.table" = "flex")
+example.table1 = tibble(x = 1:5, y = 5:1) %>% prep.table()
+
+
+example.figure.1 = ggplot(tibble(x = 1:5, y = 5:1), aes(x, y))+geom_point()
+example.figure.2 = ggplot(tibble(x = 1:5, y = 5:1), aes(y, x))+geom_point()
+
+
+set.table(example.table1, "example-table-1", "An example table.")
+set.fig(example.figure.1, "example-fig-1", "Like the table example, except a figure.")
+set.fig(example.figure.2, "example-fig-2", "Like the first example figure, except backwards.")
+
+
+prep.refs("Code-Learning_word.qmd")
+
+```
+
+## {\Code Learning}
+
+### Using the template
+
+Tables and figures should be registered in the initial setup block using `set.table()` and `set.fig()`. Captions can optionally be included when initially setting the content. Tables and figures can then be placed in the document (in code chunks only) using `place.table()` and `place.fig()`. Table numbers will be generated automatically from `prep.refs()` in the initial setup block. To refer to a table with its table number, use `ref.table()`. As an example `r ref.table("example-table-1")` is referred to here, and placed below:
+
+```{r}
+place.table("example-table-1")
+```
+
+To have part of the word document be landscape, everything between `::: landscape` and `:::` will be rendered to landscape pages. E.g., `r ref.fig("example-fig-1")` will be on a portrait page and `r ref.fig("example-fig-2")` will be on a landscape page.
+
+This will be portrait
+```{r}
+place.fig("example-fig-1")
+```
+
+::: landscape
+This will be landscape
+```{r}
+place.fig("example-fig-2")
+```
+:::
+
+This will also be portrait
+
+```{r}
+#| label: Version information
+
+       str_c("File created on: ", Sys.time(), "\n\\") %>% cat()
+       str_c("Using ", sessionInfo()$R.version$version.string, "\n\\") %>% cat()
+        str_c("dcutilities version: ", as.character(packageVersion("dcutilities")), "\n\\") %>% cat()
+        str_c("rforce version: ", as.character(packageVersion("rforce")), "\n\\") %>% cat()
+
+```

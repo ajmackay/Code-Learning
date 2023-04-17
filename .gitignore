@@ -1,0 +1,15 @@
+archived/
+*.RData
+.Rhistory
+.httr-oauth-salesforcer
+report_cache/
+.idea/
+archived/
+*.html
+./vscode
+desktop.ini
+cache/outputs
+~*
+logs/
+scripts/sandbox.R
+.Rproj.user

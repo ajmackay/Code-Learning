@@ -1,0 +1,38 @@
+---
+title: "Code Learning"
+format:
+  html:
+    toc: true
+    embed-resources: true
+    page-layout: custom
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, label = Packages, include=FALSE}
+library(dcutilities)
+library(rforce)
+
+# Automatically archives HTML file versions and optionally opens a file after rendering
+.Last = function(){archive.html.report(open = F, prefix = NULL)}
+
+```
+
+`r quarto.header()`
+
+# TOP LEVEL HEADING
+
+```{r, echo = FALSE, output = 'asis', include = FALSE }
+# The top level heading can be static by using the # TOP LEVEL HEADING above.
+# If a dynamic title is required (e.g., to include a report period date in the title), swap in below and make this chunk be included
+
+str_c("# DYNAMIC TITLE CONTENT") %>% cat()
+```
+
+## Second Level Content Heading
+
+The top level content headings get their own tabs. The next 2 heading levels get an entry in the ToC.
+
+# Another Top Level
+
+## Second top level stuff

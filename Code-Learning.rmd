@@ -1,0 +1,68 @@
+---
+title: "Code Learning"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{css CSS}
+
+```
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(dcutilities)
+library(DT)
+library(plotly)
+
+.Last = function(){archive.report()}
+
+cached.source("data.processing")
+cached.source("analysis")
+
+
+```
+
+
+
+`r report.header()`
+
+
+
+
+
+```{r, section = "Section 1"}
+
+
+```
+
+```{r section = "Section 2"}
+
+# Rows could alternatively be laid out like this
+
+list() %>% 
+  add.row(text(title = "Text stuff")) %>% 
+  add.row(text(title = "More text stuff"), graphic(title = "Graphic stuff")) %>% 
+  layout.rows()
+
+
+```
+
+
+```{r section = "Section 3"}
+
+```
+
+
+
+
+
+
+
+
+
+`r report.footer()`
